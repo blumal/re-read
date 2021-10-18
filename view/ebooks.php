@@ -24,9 +24,9 @@
     <div class="row">
         <div class="column middle">
             <div class="topnav">
-                <a href="../index.html">Re-Read</a>
-                <a href="libros.html">Libros</a>
-                <a href="ebooks.html" class="active">eBooks</a>
+                <a href="../index.php">Re-Read</a>
+                <a href="libros.php">Libros</a>
+                <a href="ebooks.php" class="active">eBooks</a>
             </div>
             <div class="textpage">
                 <h3>Toda la actualidad en eBook</h3>
@@ -59,10 +59,22 @@
         </div>
         <div class="column side">
             <h2>Top ventas</h2>
-            <p>Cien años de soledad.</p>
-            <p>Crónica de una muerte anunciada.</p>
-            <p>El otoño del patriarca.</p>
-            <p>El general en su laberinto.</p>
+            <?php
+                // 1. Conexión con la base de datos	
+                include '../services/connection.php';
+
+                // 2. Selección y muestra de datos de la base de datos
+                $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE eBook != '0'");
+
+                if (!empty($result) && mysqli_num_rows($result) > 0) {
+                // datos de salida de cada fila (fila = row)
+                    while ($row = mysqli_fetch_array($result)) {
+                    echo "<p>".$row['Title']."</p>";
+                    }
+                } else {
+                    echo "0 resultados";
+                }
+            ?>
         </div>
     </div>
 

@@ -186,6 +186,37 @@ div.gallery:hover {
 }
 
 
+/* menú de navegación fijo*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #4CAF50;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+
 /*alineación*/
 
 .inlineImg {
@@ -197,11 +228,88 @@ div.gallery:hover {
 .clear {
     clear: both;
 }
-p{
+
+p {
     font-size: 17px;
 }
-h3{
+
+h3 {
     font-size: 20px;
+}
+
+
+/* columnas */
+
+.column-2 {
+    width: 50%;
+    float: left;
+}
+
+
+/* botones */
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid 1px #4CAF50;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: solid 1px #4CAF50;
+}
+
+
+/* reglas auxiliares */
+
+.height-100 {
+    height: 100vh;
+}
+
+.padding-top {
+    padding-top: 70px;
+}
+
+.padding-top-less {
+    padding-top: 20px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right {
+    float: right;
+}
+
+#portada {
+    background-image: url(../img/bookshop.jpeg);
+    background-size: cover;
+}
+
+.padding-lat {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#mensaje {
+    margin: 3% 0;
+    width: 80%;
+    color: red;
+}
+
+#login {
+    background-color: #4caf4f5a;
 }
 
 
@@ -225,5 +333,26 @@ h3{
     }
     .header p {
         padding: 0 5%;
+    }
+    .column-2 {
+        width: 100%;
+    }
+    #portada {
+        display: none;
+    }
+    #filter {
+        padding-top: 20px;
+    }
+    #login input {
+        margin: 3% 10%;
+        width: 80%;
+    }
+    #mensaje {
+        margin: 3% 10%;
+        width: 80%;
+    }
+    .padding-lat {
+        padding-left: 0.5%;
+        padding-right: 0.5%;
     }
 }

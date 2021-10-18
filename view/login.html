@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Bookshop Zona Admin</title>
+    <link rel="shortcut icon" href="../img/book-dead-solid.svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+    <script src="../js/scripts.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="column-2 height-100" id="portada"></div>
+        <div class="column-2 height-100 flex" id="login">
+            <form action="../processes/login.proc.php" method="post">
+                <input type="email" name="email" id="email" placeholder="email...">
+                <input type="password" name="password" id="password" placeholder="contraseña...">
+                <input type="submit" value="Iniciar sesión">
+                <div id="mensaje"></div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
