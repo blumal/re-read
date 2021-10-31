@@ -44,14 +44,45 @@
 
     <div class="row padding-top-less padding-lat">
         <div class="column-1">
-            <table>
+            <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#65D047">
                 <tr>
                     <th>Titulo</th>
                     <th>Descripción</th>
                     <th>Autor</th>
                 </tr>
+                
                 <!-- Recoger libros de la base de datos -->
- 
+                <?php
+                //La primera vez titulo no estará defino, entrará por aquí, si la definimos $titulo = $_POST['titulo']; saltará un error de undefined
+                    if (!isset($_POST['titulo'])){
+                        $result = mysqli_query($conn, "SELECT b.Title, b.Description, a.Name 
+                        From booksauthors INNER JOIN books b on b.Id=booksauthors.BookId
+                        INNER JOIN authors a on booksauthors.AuthorId=a.Id;");//Variable que contiene la conexión con la BBDD + la query
+
+                        foreach ($result as $row) {
+                            echo "<tr>";
+                                echo "<td>".$row['Title']."</td>"; //Cogemos la columa title 
+                                echo "<td>".$row['Description']."</td>"; //Cogemos la columna Description
+                                echo "<td>".$row['Name']."</td>";
+                            echo "</tr>";
+                        }
+                    }else{
+                        $titulo = $_POST['titulo'];
+                        $result2 = mysqli_query($conn, "SELECT b.Title, b.Description, a.Name 
+                        From booksauthors INNER JOIN books b on b.Id=booksauthors.BookId
+                        INNER JOIN authors a on booksauthors.AuthorId=a.Id Where b.Title like '%$titulo%';");//Variable que contiene la conexión con la BBDD + la query
+                        //Where b.Title = '$titulo', esta búsqueda, será precisa, si falta algo no defino en la BBDD no devolverá nada
+                        foreach ($result2 as $row) {
+                            echo "<tr>";
+                                echo "<td>".$row['Title']."</td>"; //Cogemos la columa title 
+                                echo "<td>".$row['Description']."</td>"; //Cogemos la columna Description
+                                echo "<td>".$row['Name']."</td>";
+                            echo "</tr>";
+                        }
+                    }
+                    //Libro
+                ?>
+
             </table>
         </div>
     </div>

@@ -17,7 +17,7 @@
     <div class="row">
         <div class="column-2 height-100" id="portada"></div>
         <div class="column-2 height-100 flex" id="login">
-            <form action="../processes/login.proc.php" method="post">
+            <form action="../processes/login.proc.php" method="post" onsubmit="return validar(); //return false //No recargaos la página">
                 <input type="email" name="email" id="email" placeholder="email...">
                 <input type="password" name="password" id="password" placeholder="contraseña...">
                 <input type="submit" value="Iniciar sesión">
