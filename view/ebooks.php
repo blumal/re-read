@@ -54,14 +54,32 @@
                     <img src="../img/mientrasescribo.jpeg" alt="Mientras escribo">
                     <div class="desc">Pocas veces un libro sobre el oficio de escribir ha resultado tan clarificador, útil y revelador.</div>
                 </div>
+                    <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#65D047">
+                        <tr>
+                            <th>Descripción</th>
+                            <th>Foto</th>
+                        </tr>
+                        
+                        <?php
+                            include '../services/connection.php';
+                            $fotos = mysqli_query($conn, "SELECT Title, Description, img from books");
 
+                            while ($row = mysqli_fetch_array($fotos)) {
+                                echo "<tr>";
+                                    echo "<td>".$row['Description']."</td>"; //Cogemos la columna Description
+                                    echo "<td>"."<img width='200' src = '../img/".$row['img']."'>";
+                                echo "</tr>";
+                            }
+                        ?>
+
+                    </table> 
             </div>
         </div>
         <div class="column side">
             <h2>Top ventas</h2>
             <?php
                 // 1. Conexión con la base de datos	
-                include '../services/connection.php';
+                //include '../services/connection.php';
 
                 // 2. Selección y muestra de datos de la base de datos
                 $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE eBook != '0'");
@@ -77,7 +95,6 @@
             ?>
         </div>
     </div>
-
 </body>
 
 </html>
