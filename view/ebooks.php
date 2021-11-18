@@ -30,6 +30,37 @@
             </div>
             <div class="textpage">
                 <h3>Toda la actualidad en eBook</h3>
+                <form action="ebooks.php" method="get">
+                    <p>Autor</p>
+                        <input type="text" name="autorform" placeholder="Autor del libro..."><br><br>
+
+                        <?php
+                            include '../services/connection.php';
+
+                            $pais = mysqli_query($conn, "SELECT Country FROM Authors GROUP BY Country");
+
+                            echo "<label for='seleccion-Pais-BBDD'>País:</label><br><br>";
+                            echo "<select name='paisform' value=''>";
+                            echo "<option value = ''></option>";
+                                foreach ($pais as $reg) {
+                                    echo "<option value='{$reg['Country']}'>{$reg['Country']}</option>";
+                                }
+                            echo "</select><br><br>"
+                        ?>
+
+                    <input type="submit" value="Buscar" name="submit">
+                </form>
+
+                <?php
+                    if(isset($_GET['submit'])){
+                        echo "Hola";
+                        $autorform = $_GET['autorform'];
+                        $paisform = $_GET['paisform'];
+                    }else{
+                        echo "";
+                    }
+                ?>
+
                 <div class="gallery">
                     <img src="../img/cell.jpeg" alt="Cell">
                     <div class="desc">A través de los teléfonos móviles se envía un mensaje que convierte a todos en esclavos asesinos...</div>
@@ -61,7 +92,7 @@
 
                 <?php
                     // 1. Conexión con la base de datos	
-                    include '../services/connection.php';
+                    //include '../services/connection.php';
 
                     // 2. Selección y muestra de datos de la base de datos
                     $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE eBook != '0'");
