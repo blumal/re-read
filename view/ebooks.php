@@ -47,7 +47,6 @@
                                 }
                             echo "</select><br><br>"
                         ?>
-
                     <input type="submit" value="Buscar" name="submit">
                 </form>
 
