@@ -48,42 +48,57 @@
                             echo "</select><br><br>"
                         ?>
                     <input type="submit" value="Buscar" name="submit">
-                </form>
+                </form><br>
 
                 <?php
                     if(isset($_GET['submit'])){
-                        echo "Hola";
                         $autorform = $_GET['autorform'];
                         $paisform = $_GET['paisform'];
+
+                        $filtroAuthor = mysqli_query($conn, "SELECT a.Name, b.Title, b.Description, a.Country, b.img FROM authors a 
+                        INNER JOIN booksauthors bb ON bb.AuthorId=a.Id
+                        INNER JOIN books b ON b.Id=bb.BookId
+                        WHERE a.Name LIKE '%$autorform%' && a.Country LIKE '%$paisform%';");
+
+                        echo "<table width='100%' border='1' cellpadding='0' cellspacing='0' bordercolor='#117A65'>";
+                            echo "<tr style='background-color:#117A65'>";
+                                echo "<th>Autor</th>";
+                                echo "<th>Título</th>";
+                                echo "<th>Descripción</th>";
+                                echo "<th>País de autor</th>";
+                                echo "<th>Portada</th>";
+                            echo "</tr>";
+                                foreach ($filtroAuthor as $row) {
+                                    echo "<tr>";
+                                        echo "<td>".$row['Name']."</td>";
+                                        echo "<td>".$row['Title']."</td>";
+                                        echo "<td>".$row['Description']."</td>"; //Cogemos la columna Description
+                                        echo "<td>".$row['Country']."</td>";
+                                        echo "<td>"."<img width='200' src = '../img/".$row['img']."'>";
+                                    echo "</tr>";
+                                }
+                        echo "</table>";
+                        
                     }else{
-                        echo "";
+                        echo "<table width='80%' border='1' cellpadding='0' cellspacing='0'>";
+                            echo "<tr style='background-color:#117A65' style='color:white'>";
+                                echo "<th>Descripción</th>";
+                                echo "<th>Foto</th>";
+                            echo "</tr>";
+                        //include '../services/connection.php';
+                        $fotos = mysqli_query($conn, "SELECT Title, Description, img from books");
+
+                        while ($row = mysqli_fetch_array($fotos)) {
+                            echo "<tr>";
+                                echo "<td>".$row['Description']."</td>"; //Cogemos la columna Description
+                                echo "<td>"."<img width='200' src = '../img/".$row['img']."'>";
+                            echo "</tr>";
+                        }
+                        
+                        echo "</table>";
                     }
                 ?>
-
-                <div class="gallery">
-                    <img src="../img/cell.jpeg" alt="Cell">
-                    <div class="desc">A través de los teléfonos móviles se envía un mensaje que convierte a todos en esclavos asesinos...</div>
-                </div>
-
-                <div class="gallery">
-                    <img src="../img/elciclodelhombrelobo.jpeg" alt="El ciclo del hombre lobo">
-                    <div class="desc">Una escalofriante revisión del mito del hombre lobo por el rey de la literatura de terror...</div>
-                </div>
-
-                <div class="gallery">
-                    <img src="../img/elresplandor.jpeg" alt="El resplandor">
-                    <div class="desc">Esa es la palabra que Danny había visto en el espejo. Y, aunque no sabía leer, entendió que era un mensaje de horror...</div>
-                </div>
-
-                <div class="gallery clear">
-                    <img src="../img/doctorsleep.jpeg" alt="doctorsleep">
-                    <div class="desc">Una novela que entusiasmará a los millones de lectores de El resplandor y que encantará...</div>
-                </div>
-
-                <div class="gallery">
-                    <img src="../img/mientrasescribo.jpeg" alt="Mientras escribo">
-                    <div class="desc">Pocas veces un libro sobre el oficio de escribir ha resultado tan clarificador, útil y revelador.</div>
-                </div>
+                
             </div>
         </div>
         <div class="column side">
@@ -108,26 +123,6 @@
 
         </div>
     </div>
-    <center>
-        <table width="80%" border="1" cellpadding="0" cellspacing="0" bordercolor="#117A65">
-            <tr>
-                <th>Descripción</th>
-                <th>Foto</th>
-            </tr>
-            
-            <?php
-                //include '../services/connection.php';
-                $fotos = mysqli_query($conn, "SELECT Title, Description, img from books");
-
-                while ($row = mysqli_fetch_array($fotos)) {
-                    echo "<tr>";
-                        echo "<td>".$row['Description']."</td>"; //Cogemos la columna Description
-                        echo "<td>"."<img width='200' src = '../img/".$row['img']."'>";
-                    echo "</tr>";
-                }
-            ?>
-        </table>
-    </center>
 </body>
 
 </html>
