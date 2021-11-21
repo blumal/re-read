@@ -5,7 +5,7 @@
     <title>Re-Read</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <link rel="icon" href="./img/icon.png">
 
 </head>
@@ -24,9 +24,9 @@
     <div class="row">
         <div class="column middle">
             <div class="topnav">
-                <a href="index.html" class="active">Re-Read</a>
-                <a href="view/libros.html">Libros</a>
-                <a href="view/ebooks.html">eBooks</a>
+                <a href="index.php" class="active">Re-Read</a>
+                <a href="libros.php">Libros</a>
+                <a href="ebooks.php">eBooks</a>
             </div>
             <div class="textpage">
                 <h3>Nunca la lectura ha sido tan necesaria</h3>
@@ -40,10 +40,22 @@
 
         <div class="column side">
             <h2>Top ventas</h2>
-            <p>Cien años de soledad.</p>
-            <p>Crónica de una muerte anunciada.</p>
-            <p>El otoño del patriarca.</p>
-            <p>El general en su laberinto.</p>
+            <?php
+                // 1. Conexión con la base de datos	
+                include '../services/connection.php';
+
+                // 2. Selección y muestra de datos de la base de datos
+                $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE eBook != '0'");
+
+                if (!empty($result) && mysqli_num_rows($result) > 0) {
+                // datos de salida de cada fila (fila = row)
+                    while ($row = mysqli_fetch_array($result)) {
+                    echo "<p>".$row['Title']."</p>";
+                    }
+                } else {
+                    echo "0 resultados";
+                }
+            ?>
         </div>
     </div>
 
